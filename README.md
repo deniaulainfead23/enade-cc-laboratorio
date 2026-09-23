@@ -58,3 +58,7 @@ Antes de aceitar contas reais, substitua os dados de exemplo do responsável e d
 npm run typecheck
 npm run build
 ```
+
+## Documentação do projeto
+
+Consulte [`docs/README.md`](docs/README.md) para visão geral, arquitetura, dados, instalação, publicação, operação, privacidade e acessibilidade.
