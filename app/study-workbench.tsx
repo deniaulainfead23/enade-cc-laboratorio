@@ -13,7 +13,15 @@ type Attempt = { score: number; total: number; createdAt: string };
 type StudentData = { signedIn: boolean; profile?: Profile; topics?: ProgressRow[]; attempts?: Attempt[]; error?: string };
 
 const topics = [...new Set(questionBank.map((q) => q.topic))];
-const sample = (items: Question[], amount: number) => [...items].sort(() => Math.random() - .5).slice(0, amount);
+const sample = (items: Question[], amount: number) => {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, amount);
+};
+const topicQuestionCount = (topic: string) => questionBank.filter((question) => question.topic === topic).length;
 
 export default function StudyWorkbench() {
   const [user, setUser] = useState<User | null>(null);
@@ -87,7 +95,7 @@ export default function StudyWorkbench() {
     void Promise.resolve(context.registerTool({
       name: "start_random_enade_simulado",
       title: "Iniciar simulado aleatório",
-      description: "Sorteia e abre um simulado de 15 questões. Uma área escolhida é priorizada; o conjunto é completado com outros conteúdos quando necessário.",
+      description: "Sorteia 15 questões. Quando uma disciplina é escolhida, todas as questões são daquela disciplina; não completa com outras áreas.",
       inputSchema: { type: "object", properties: { topic: { type: "string", enum: ["Todas as áreas", ...topics] } }, additionalProperties: false },
       annotations: { readOnlyHint: false, untrustedContentHint: false },
       execute(input) {
@@ -95,7 +103,7 @@ export default function StudyWorkbench() {
         const topic = requested === undefined ? "Todas as áreas" : String(requested);
         if (topic !== "Todas as áreas" && !topics.includes(topic)) throw new Error("Área de estudo inválida.");
         startQuiz(topic);
-        return { started: true, topic, questionCount: 15, questionBankSize: questionBank.length };
+        return { started: true, topic, questionCount: 15, topicQuestionCount: topic === "Todas as áreas" ? questionBank.length : topicQuestionCount(topic) };
       },
     }, { signal: lifecycle.signal })).catch((error) => console.warn("WebMCP quiz tool registration failed", error));
     return () => lifecycle.abort();
@@ -116,9 +124,16 @@ export default function StudyWorkbench() {
   }, [topicRows]);
   const startQuiz = (topic = "Todas as áreas") => {
     const pool = topic === "Todas as áreas" ? questionBank : questionBank.filter((q) => q.topic === topic);
-    const focus = topic === "Todas as áreas" ? [] : sample(pool, Math.min(5, pool.length));
-    const remainder = sample(questionBank.filter((question) => !focus.some((chosen) => chosen.id === question.id)), 15 - focus.length);
-    setQuiz(sample([...focus, ...remainder], 15));
+    if (pool.length < 15) {
+      setQuiz([]);
+      setAnswers({});
+      setResult(null);
+      setMessage(topic === "Todas as áreas"
+        ? "O banco geral ainda não tem 15 questões disponíveis."
+        : `Esta disciplina tem ${pool.length} questão(ões). O simulado específico será liberado quando houver pelo menos 15 questões próprias. Nenhuma questão de outra disciplina será usada.`);
+      return;
+    }
+    setQuiz(sample(pool, 15));
     setAnswers({});
     setResult(null);
     setStep(0);
@@ -160,8 +175,8 @@ export default function StudyWorkbench() {
       <div className="work-heading"><div><p className="eyebrow">SIMULADOS E QUESTÕES</p><h2 id="study-title">Pratique e acompanhe sua evolução</h2><p>Simulados com 15 questões sorteadas de um banco por área. As questões são autorais e inspiradas nos conteúdos e no formato público do ENADE.</p></div><span className="question-count"><Sparkles size={15}/> {questionBank.length} questões</span></div>
       {!quiz.length && <div className="quiz-launch">
         <label htmlFor="topic-picker">Escolha uma área ou faça um simulado misto</label>
-        <div className="quiz-launch-row"><select id="topic-picker" value={activeTopic} onChange={(event) => setActiveTopic(event.target.value)}><option>Todas as áreas</option>{topics.map((topic) => <option key={topic}>{topic}</option>)}</select><button className="primary-button quiz-start" onClick={() => startQuiz(activeTopic)}>Sortear 15 questões <ArrowRight size={16}/></button></div>
-        <p>São sempre 15 questões. Quando uma área tem poucos itens, o sorteio completa o conjunto com questões das demais áreas.</p>
+        <div className="quiz-launch-row"><select id="topic-picker" value={activeTopic} onChange={(event) => setActiveTopic(event.target.value)}><option>Todas as áreas</option>{topics.map((topic) => <option key={topic} value={topic} disabled={topicQuestionCount(topic) < 15}>{topic} ({topicQuestionCount(topic)} questões{topicQuestionCount(topic) < 15 ? " · precisa de 15" : ""})</option>)}</select><button className="primary-button quiz-start" onClick={() => startQuiz(activeTopic)}>Sortear 15 questões <ArrowRight size={16}/></button></div>
+        <p>O simulado misto sorteia 15 questões do banco geral. Para um simulado específico, são necessárias pelo menos 15 questões da própria disciplina; questões de outras áreas não serão misturadas.</p>
       </div>}
       {current && <div className="quiz-card" aria-live="polite">
         <div className="quiz-progress-line"><span>Questão {step + 1} de {quiz.length}</span><span>{current.topic} · {current.difficulty}</span></div>
