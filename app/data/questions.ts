@@ -40,3 +40,349 @@ export const questionBank: Question[] = [
  {id:"re1",topic:"Redes de Computadores",difficulty:"Média",prompt:"Em uma arquitetura cliente-servidor, qual função é típica do DNS?",options:["Traduzir nomes de domínio em informações de endereçamento usadas na rede.","Criptografar todos os arquivos do computador.","Garantir a entrega de cada pacote sem perda.","Substituir o protocolo IP."],answer:0,explanation:"O DNS resolve nomes de domínio, fornecendo registros associados a serviços e endereços."},
  {id:"re2",topic:"Redes de Computadores",difficulty:"Difícil",prompt:"Uma conexão usa HTTPS. Qual afirmação descreve corretamente o papel do TLS?",options:["Protege a comunicação com criptografia e autenticação do servidor conforme a configuração.","Impede qualquer vulnerabilidade na aplicação web.","Substitui a autorização de usuários no sistema.","Torna desnecessária a validação de certificados."],answer:0,explanation:"TLS protege o canal e pode autenticar o servidor; não corrige falhas de lógica nem substitui controles de acesso."}
 ];
+
+
+
+type ExpandedSeed = [prompt: string, correct: string, explanation: string];
+type ExpandedTopic = { prefix: string; seeds: ExpandedSeed[] };
+const expandedTopics: Record<string, ExpandedTopic> = {
+"Inteligência Artificial":{prefix:"ia",seeds:[
+["Uma rede de saúde detecta taxas de erro maiores para pacientes de alguns bairros. Que etapa antecede o uso do modelo?","Auditar representatividade, qualidade dos dados e erros por grupo.","Métricas desagregadas revelam desigualdades que uma média pode ocultar."],
+["Uma secretaria usa IA para priorizar inspeções. Como manter decisões contestáveis?","Registrar critérios, versões do modelo e justificativas das recomendações.","Rastreabilidade apoia auditoria, contestação e responsabilização."],
+["Um classificador tem alta acurácia, mas falha em casos raros de alto risco. O que avaliar?","Precisão, recall e matriz de confusão conforme o custo dos erros.","As métricas devem refletir consequências de falsos positivos e negativos."],
+["Uma IA resume legislação pública. Como reduzir afirmações sem fonte?","Recuperar documentos oficiais, citar trechos e permitir revisão humana.","Referências tornam respostas verificáveis, mas não dispensam revisão."],
+["Um conjunto de treinamento contém dados pessoais sensíveis. Qual conduta é adequada?","Definir finalidade, base legal, minimização, acesso e retenção.","O tratamento requer finalidade, necessidade e segurança."],
+["Uma organização compra modelo de terceiro para decisões relevantes. O que fazer antes do uso?","Avaliar desempenho, limitações e riscos no contexto local.","A validação do fornecedor não substitui avaliação contextual."],
+["Uma visão computacional será usada sob iluminação variável. Como validar?","Testar com dados que representem condições reais de operação.","A avaliação deve cobrir a distribuição esperada em produção."],
+["Um chatbot responde com confiança, mas apresenta dados contraditórios. Qual salvaguarda incluir?","Informar limites, indicar fontes e oferecer encaminhamento humano.","Transparência impede tratar uma saída probabilística como fato garantido."],
+["Um modelo é atualizado mensalmente. O que monitorar?","Deriva dos dados, desempenho e efeitos nos grupos afetados.","Mudanças podem invalidar a avaliação inicial."],
+["Uma instituição automatiza concessão de bolsas. Qual governança é responsável?","Manter supervisão, critérios documentados e canal de recurso.","Decisões de alto impacto exigem accountability e contestação."],
+["Uma equipe prevê demanda usando dados temporais. Como evitar vazamento?","Separar treino e teste respeitando a ordem temporal.","A separação impede usar informação futura na previsão passada."],
+["Uma aplicação será usada em áreas com conectividade limitada. Qual decisão favorece inclusão?","Oferecer alternativas acessíveis e testar em baixa conectividade.","O projeto deve considerar condições reais de acesso."],
+["Uma recomendação de IA é apresentada a gestores. Como comunicar incerteza?","Informar limitações, intervalo de confiança e condições de validação.","A comunicação evita interpretar estimativas como certezas."]
+]},
+"Compiladores":{prefix:"co",seeds:[
+["O compilador distingue palavras reservadas de identificadores. Qual etapa faz isso?","Análise léxica, que converte lexemas em tokens.","A análise léxica reconhece unidades da linguagem."],
+["Uma sequência de tokens viola a gramática. Qual etapa detecta o erro?","Análise sintática, que verifica estruturas gramaticais.","O parser verifica se tokens formam construções válidas."],
+["Para x + y * z, qual árvore respeita a precedência usual?","Uma soma cujo operando direito é y multiplicado por z.","Multiplicação tem precedência sobre soma."],
+["Uma variável é usada antes de sua declaração. Qual análise identifica o problema?","Análise semântica usando informações de declaração e escopo.","A análise semântica verifica significado e regras contextuais."],
+["O compilador associa nome a tipo e escopo. Que estrutura o auxilia?","Tabela de símbolos com atributos das declarações.","A tabela mantém informações sobre identificadores."],
+["Uma otimização remove uma expressão redundante. Qual propriedade precisa preservar?","A semântica observável do programa para as entradas válidas.","Otimizações devem preservar o comportamento definido."],
+["Código intermediário simplifica geração para diferentes processadores. Qual benefício oferece?","Separar análise da linguagem-fonte da geração para o alvo.","A representação intermediária favorece portabilidade."],
+["Um erro de sintaxe ocorre no meio do arquivo. O que permite continuar a análise?","Recuperação com pontos de sincronização da gramática.","A sincronização possibilita relatar outros erros."],
+["Uma função recebe argumento incompatível com seu parâmetro. O que verificar?","Compatibilidade de tipos e regras de conversão.","Chamadas devem respeitar tipos ou conversões permitidas."],
+["O compilador gera código específico para ARM. Qual fase realiza essa tarefa?","Geração de código para a arquitetura-alvo.","A fase final mapeia a representação às instruções disponíveis."],
+["Uma otimização reordena operações com ponto flutuante. Qual cuidado é necessário?","Considerar precisão finita e efeitos observáveis.","Regras algébricas podem não valer para números de precisão finita."],
+["Um parser descendente recebe gramática com recursão à esquerda. Que risco existe?","Recursão infinita sem transformação ou tratamento adequado.","Parsers descendentes recursivos podem repetir chamadas."],
+["O linker precisa resolver função definida em outro módulo. O que usa?","Símbolos externos e informações de relocação.","A ligação resolve referências entre módulos compilados."]
+]},
+"Arquitetura de Computadores":{prefix:"ar",seeds:[
+["A CPU busca, decodifica e executa instruções. Qual componente coordena essa sequência?","Unidade de controle.","A unidade de controle coordena etapas e sinais da execução."],
+["Um programa acessa repetidamente os mesmos dados. Por que cache reduz latência?","Explora localidade temporal e mantém cópias próximas da CPU.","Dados recentes têm maior chance de reutilização."],
+["Uma aplicação acessa regiões próximas de memória. Qual princípio beneficia a cache?","Localidade espacial das referências.","Acessos tendem a ocorrer próximos aos anteriores."],
+["Uma equipe compara larguras de barramento de 32 e 64 bits. O que isso indica?","Quantidade de bits transferida em paralelo por operação.","Largura influencia transferência, mas não define todo o desempenho."],
+["Um processador sobrepõe etapas de instruções distintas. Qual técnica utiliza?","Pipeline de instruções.","Pipeline sobrepõe etapas, sujeito a hazards."],
+["Uma instrução depende do resultado da anterior no pipeline. Que situação pode surgir?","Hazard de dados, tratado por encaminhamento ou espera.","Dependências podem exigir forwarding ou stall."],
+["A CPU precisa atender teclado sem consultar continuamente seu estado. Qual mecanismo usar?","Interrupções.","O dispositivo sinaliza eventos quando necessário."],
+["Um controlador transfere blocos para memória sem intervenção da CPU por byte. Qual mecanismo ajuda?","Acesso direto à memória (DMA).","DMA reduz a participação da CPU em transferências de blocos."],
+["Um processo usa endereços virtuais maiores que a RAM disponível. Qual mecanismo viabiliza isso?","Paginação e tradução entre endereços virtuais e físicos.","Memória virtual abstrai a memória física."],
+["Uma máquina tem vários núcleos. O que permite aproveitá-los?","Trabalho paralelizável e suporte de software.","Mais núcleos não aceleram automaticamente código serial."],
+["Dois processadores têm frequências distintas. Como comparar desempenho com rigor?","Medir tempo em cargas representativas e considerar arquitetura e memória.","Frequência isolada não representa desempenho global."],
+["Um equipamento embarcado tem bateria limitada. O que considerar no projeto?","Consumo por operação, estados de baixo consumo e desempenho exigido.","A decisão equilibra energia e requisitos."],
+["Uma transmissão interna pode corromper bits. Que recurso detecta certos erros?","Paridade ou códigos de detecção apropriados.","Redundância pode revelar corrupção de dados."]
+]},
+"Sistemas Operacionais":{prefix:"so",seeds:[
+["Há vários processos prontos para executar. Qual componente escolhe o próximo?","Escalonador de processos.","O escalonador seleciona tarefas segundo uma política."],
+["Um processo aguarda leitura do disco. Como o SO mantém a CPU ocupada?","Executando outro processo pronto enquanto a entrada e saída ocorre.","O bloqueio libera a CPU para outra tarefa."],
+["Dois processos retêm recursos e aguardam recursos um do outro. Qual situação pode ocorrer?","Deadlock, se as condições necessárias coexistirem.","Retenção e espera circular podem causar impasse."],
+["Um programa tenta acessar memória de outro processo. Qual mecanismo impede isso?","Isolamento por espaços de endereçamento e permissões.","A proteção reduz interferência entre processos."],
+["Duas threads atualizam o mesmo contador simultaneamente. Qual risco existe?","Condição de corrida.","A ordem não controlada pode produzir resultado incorreto."],
+["Uma seção crítica protege estado compartilhado. Qual mecanismo pode sincronizá-la?","Mutex ou mecanismo equivalente de exclusão mútua.","A exclusão mútua coordena acesso concorrente."],
+["Uma página precisa ser removida da RAM. Qual política pode selecionar a vítima?","Algoritmo de substituição, como LRU aproximado.","A política escolhe página segundo critérios definidos."],
+["Um usuário só pode ler determinado arquivo. Qual recurso implementa essa regra?","Permissões ou lista de controle de acesso.","O sistema associa operações autorizadas a identidades."],
+["Um serviço deve iniciar com o sistema e ser monitorado. Qual componente o gerencia?","Gerenciador de serviços e inicialização.","Serviços podem ser iniciados e supervisionados pelo SO."],
+["Um desligamento inesperado interrompe escrita no sistema de arquivos. Qual recurso ajuda na recuperação?","Journaling ou mecanismo de consistência equivalente.","O registro permite recuperar operações após falha."],
+["Um processo monopoliza CPU indefinidamente. O que melhora a equidade?","Preempção por fatias de tempo e política de escalonamento.","Preempção devolve o controle ao escalonador."],
+["O servidor apresenta lentidão e memória elevada. O que deve ser analisado?","Métricas de CPU, memória, disco, processos e logs.","Observação conjunta orienta o diagnóstico."],
+["Uma aplicação instala driver com permissões elevadas. Qual cuidado reduz risco?","Usar componentes confiáveis, atualizados e com privilégio mínimo.","Drivers executam com acesso amplo ao sistema."]
+]},
+"Matemática Discreta e Grafos":{prefix:"ma",seeds:[
+["Uma rede de ruas usa vértices e arestas não orientadas. O que o grau mede?","Número de arestas incidentes ao vértice.","Grau conta as arestas ligadas ao vértice."],
+["Uma equipe verifica se qualquer ponto alcança outro por algum caminho. Qual propriedade avalia?","Conectividade do grafo.","Conectividade indica caminhos entre os vértices."],
+["Uma rede de transporte atribui custo a cada ligação. Como modelar?","Atribuir pesos às arestas e buscar caminho mínimo.","Os pesos representam distância, tempo ou custo."],
+["Cidades precisam ser conectadas com menor custo total. Qual estrutura buscar?","Árvore geradora mínima.","Ela conecta os vértices sem ciclos com soma de pesos mínima."],
+["Uma árvore simples tem 20 vértices. Quantas arestas possui?","19 arestas.","Toda árvore com n vértices possui n menos 1 arestas."],
+["Dependências entre tarefas são representadas por u→v. O que indica?","Uma dependência orientada de u para v.","A direção representa precedência ou fluxo."],
+["A equipe quer ordenar tarefas sem dependências cíclicas. Qual técnica aplicar?","Ordenação topológica em grafo acíclico direcionado.","Uma ordenação topológica respeita as dependências."],
+["Uma relação é recíproca, como amizade mútua. Qual grafo representa melhor?","Grafo não direcionado.","A relação não exige orientação."],
+["Uma rota percorre cada aresta uma única vez. Que problema é esse?","Trilha euleriana.","Uma trilha euleriana usa cada aresta uma vez."],
+["Um percurso passa por cada vértice exatamente uma vez e retorna à origem. Qual conceito?","Ciclo hamiltoniano.","O ciclo visita cada vértice uma única vez."],
+["Uma tabela verdade avalia proposição com conectivos. O que determina o resultado?","Valores das proposições e regras dos conectivos lógicos.","Conjunção, disjunção e negação definem a avaliação."],
+["Um argumento não tem caso com premissas verdadeiras e conclusão falsa. Como classificá-lo?","Válido.","Validade preserva verdade em todas as interpretações."],
+["O acesso exige senha e segundo fator verdadeiros. Qual conectivo representa isso?","Conjunção lógica.","A autorização depende de ambas as condições."]
+]},
+"Sistemas Paralelos e Distribuídos":{prefix:"pa",seeds:[
+["Um serviço replica dados em três nós. Que aspecto precisa administrar?","Propagação de atualizações e consistência entre réplicas.","Atualizações podem chegar em momentos ou ordens diferentes."],
+["80% de uma tarefa é paralelizável. Qual limite teórico com infinitos processadores?","Speedup máximo de 5 vezes.","A fração serial de 20% limita o ganho a 1 dividido por 0,2."],
+["Uma matriz é dividida entre núcleos. O que reduz o ganho esperado?","Comunicação, sincronização e partes seriais.","Overhead e serialização limitam a aceleração."],
+["Um serviço distribuído sofre atraso e perda de mensagens. Que propriedade deve assumir?","Falhas parciais e latência variável da rede.","Um nó pode falhar sem interromper todos os demais."],
+["Um cluster adiciona servidores conforme cresce a demanda. Que propriedade busca?","Escalabilidade horizontal.","A capacidade cresce pela adição de nós."],
+["Uma requisição de pagamento pode ser reenviada após timeout. Que propriedade evita cobrança duplicada?","Idempotência ou chave de deduplicação.","Retentativas não devem repetir efeitos irreversíveis."],
+["Réplicas recebem atualizações simultâneas em regiões diferentes. Qual desafio surge?","Consistência e resolução de conflitos.","Atualizações concorrentes precisam de política de reconciliação."],
+["Uma aplicação cria milhares de tarefas muito pequenas. Que custo pode dominar?","Overhead de criação, sincronização e comunicação.","Tarefas finas podem custar mais do que o trabalho útil."],
+["Uma barreira sincroniza etapas paralelas. O que garante?","Participantes aguardam até todos alcançarem o ponto.","A barreira coordena fases da execução."],
+["Um cluster elege um líder. Para que serve?","Coordenar operações que exigem um responsável ativo único.","A eleição organiza coordenação com tratamento de falhas."],
+["Uma gravação precisa sobreviver à falha de nó. Que política deve definir?","Número de réplicas e critério de confirmação da escrita.","A política equilibra durabilidade e latência."],
+["Um benchmark com oito núcleos acelera somente quatro vezes. Como interpretar?","Fração serial e custos de comunicação reduzem o speedup.","Aceleração linear não é garantida."],
+["A equipe injeta falhas para avaliar recuperação do serviço. Qual prática realiza?","Teste de caos ou teste controlado de resiliência.","A injeção controlada verifica comportamento diante de falhas."]
+]},
+"Banco de Dados":{prefix:"bd",seeds:[
+["Uma tabela de matrículas precisa identificar cada linha sem repetição. Qual restrição atende?","Chave primária única e não nula.","A chave identifica cada registro."],
+["Uma consulta filtra muitos pedidos pela data. Qual recurso pode reduzir leituras?","Índice apropriado ao padrão de consulta.","Índices aceleram certas consultas com custo de escrita e espaço."],
+["Uma transferência debita e credita contas. Qual propriedade garante tudo ou nada?","Atomicidade.","A transação não deve ficar parcialmente aplicada."],
+["Duas transações atualizam o mesmo registro. Qual mecanismo controla conflitos?","Isolamento com bloqueio ou controle otimista.","O controle de concorrência organiza atualizações simultâneas."],
+["Um relatório duplica linhas após junção. O que revisar?","Cardinalidade e condição de junção.","Junção incorreta multiplica linhas."],
+["Uma matrícula precisa referenciar aluno existente. Qual restrição usar?","Chave estrangeira com integridade referencial.","A referência deve apontar para registro válido."],
+["Uma falha ocorre no meio de atualização. Que recurso ajuda a desfazer ou refazer operações?","Log de transações e recuperação.","O log permite rollback e recuperação após falhas."],
+["Uma aplicação consulta cidade dentro de um endereço armazenado num campo único. Qual ajuste pode ajudar?","Separar atributos quando precisarem de validação ou consulta independentes.","Componentes atômicos facilitam busca e validação."],
+["Uma consulta retorna colunas que não serão usadas. O que otimizar?","Projetar somente as colunas necessárias.","Menos dados são lidos e transferidos."],
+["Um relatório precisa de leitura consistente durante alterações concorrentes. O que configurar?","Nível de isolamento adequado ao requisito.","O isolamento define fenômenos visíveis entre transações."],
+["Uma alteração de esquema vai para produção. O que planejar?","Migração versionada, compatibilidade e retorno seguro.","Mudanças controladas reduzem indisponibilidade e perda."],
+["Um catálogo varia muito entre produtos. Como comparar bancos relacionais e documentos?","Avaliar consultas, integridade, consistência e evolução dos dados.","A escolha depende dos requisitos do domínio."],
+["E-mails não podem se repetir entre usuários. Qual restrição expressa isso?","UNIQUE.","A restrição impede duplicidade no conjunto."]
+]},
+"Modelagem de Sistemas":{prefix:"mo",seeds:[
+["Uma equipe registra mensagens entre objetos em ordem temporal. Qual diagrama UML usar?","Diagrama de sequência.","Ele apresenta participantes e mensagens no tempo."],
+["Um pedido possui vários itens e cada item pertence a um pedido. Como registrar quantidades?","Multiplicidades nas extremidades da associação.","Multiplicidades informam limites da relação."],
+["A área lista atores e objetivos do sistema. Qual diagrama é adequado?","Diagrama de casos de uso.","Casos de uso apresentam atores e funcionalidades."],
+["Um pedido passa por estados e transições acionadas por eventos. Qual diagrama utilizar?","Diagrama de máquina de estados.","O diagrama descreve estados e transições."],
+["Um processo de aprovação tem decisões e tarefas paralelas. Qual diagrama mostrar?","Diagrama de atividades.","Ele modela ações, decisões e fluxos paralelos."],
+["Um sistema divide módulos com interfaces fornecidas e requeridas. Qual diagrama usar?","Diagrama de componentes.","Componentes mostram módulos e suas dependências."],
+["A implantação precisa mapear serviços aos servidores físicos. Qual diagrama escolher?","Diagrama de implantação.","Ele representa nós e alocação de artefatos."],
+["Uma associação é obrigatória para toda instância de uma classe. Como expressar?","Multiplicidade mínima igual a um.","A multiplicidade registra mínimo e máximo."],
+["Uma parte não pode existir fora do ciclo de vida do todo. Qual relação pode representar?","Composição, se a regra do domínio sustentar a dependência.","Composição representa relação todo-parte forte."],
+["A equipe precisa modelar estrutura estática e operações de entidades. Qual diagrama iniciar?","Diagrama de classes.","Classes apresentam atributos, operações e relações."],
+["Um requisito mudou e afeta implementação e testes. Qual prática ajuda avaliar impacto?","Rastrear requisito a casos de uso, componentes e testes.","Rastreabilidade liga necessidades às entregas."],
+["Um único diagrama mistura estados, fluxo e estrutura. Como melhorar comunicação?","Escolher diagramas diferentes conforme a perspectiva necessária.","Cada diagrama evidencia uma visão específica."],
+["Uma API externa troca mensagens com o sistema. Como representá-la na interação?","Como participante externo no diagrama de sequência.","Lifelines podem representar sistemas externos."]
+]},
+"Orientação a Objetos":{prefix:"oo",seeds:[
+["Uma classe define dados e operações comuns. O que é um objeto criado a partir dela?","Instância concreta com estado próprio.","O objeto tem identidade, estado e comportamento."],
+["Duas classes implementam interface comum de formas distintas. Qual recurso permite tratá-las pelo contrato?","Polimorfismo baseado na abstração.","O cliente usa a interface sem depender da implementação."],
+["Uma classe controla acesso a seus atributos por métodos. Qual princípio aplica?","Encapsulamento.","Encapsulamento protege estado e expõe operações controladas."],
+["Uma subclasse especializa uma classe base. Qual relação está sendo usada?","Herança, quando a substituição semântica é válida.","Herança representa especialização apropriada."],
+["Uma função recebe interface em vez de classe concreta. Qual efeito de projeto é favorecido?","Baixo acoplamento com implementações.","Abstrações permitem trocar colaboradores."],
+["Uma classe calcula relatório, envia e-mail e persiste dados. Qual princípio revisar?","Responsabilidade única.","Múltiplas razões de mudança indicam responsabilidades concentradas."],
+["Uma classe depende de implementações fixas. Como facilitar teste e substituição?","Injetar dependências por abstrações.","A inversão de dependência reduz acoplamento."],
+["Subtipos alteram as expectativas do tipo-base. Qual princípio é violado?","Substituição de Liskov.","Subtipos devem preservar o contrato esperado."],
+["Um objeto reúne outros objetos em vez de herdar comportamento. Qual abordagem é essa?","Composição.","Composição combina objetos de forma flexível."],
+["Em Java, dois métodos têm mesmo nome e parâmetros diferentes. Qual mecanismo?","Sobrecarga.","Assinaturas diferentes permitem métodos sobrecarregados."],
+["Uma subclasse fornece implementação própria para método herdado. Qual mecanismo ocorre?","Sobrescrita.","A sobrescrita especializa o comportamento herdado."],
+["Uma conta deve impedir saldo negativo. Onde proteger essa regra?","Em operações de domínio que preservem invariantes.","Invariantes devem ser garantidas pelo próprio modelo."],
+["Uma classe será testada sem serviço externo. Qual desenho facilita isso?","Dependências explícitas substituíveis por dublês.","A substituição torna o teste isolado."]
+]},
+"Python":{prefix:"py",seeds:[
+["Uma lista contém [4, 7, 9]. O que retorna len(lista)?","O inteiro 3.","len informa a quantidade de elementos."],
+["Um script percorre registros sem alterar a coleção. Qual estrutura é adequada?","for registro in registros.","for itera sobre elementos de um iterável."],
+["Uma função pode modificar lista recebida. Como evitar efeito colateral quando necessário?","Criar cópia da lista conforme o contrato.","Listas são mutáveis e referências podem compartilhar o mesmo objeto."],
+["Um arquivo deve ser fechado mesmo se ocorrer exceção. Qual construção usar?","with open(...) como gerenciador de contexto.","O bloco with fecha o recurso ao final."],
+["Uma função recebe lista como padrão. Qual risco há em usar [] na assinatura?","O mesmo objeto mutável pode persistir entre chamadas.","Valores padrão são avaliados uma vez na definição."],
+["Uma equipe ordena registros pelo campo idade. Qual função usar?","sorted com parâmetro key.","key seleciona o valor usado na ordenação."],
+["Uma coleção precisa relacionar identificadores a valores. Qual tipo usar?","Dicionário.","dict mapeia chaves a valores."],
+["Um algoritmo precisa reutilizar validação em vários pontos. Qual abstração usar?","Função com parâmetros e retorno definidos.","Funções encapsulam comportamento reutilizável."],
+["Uma entrada inválida causa ValueError. Como tratar sem esconder outros erros?","Capturar a exceção específica esperada.","Tratamento específico preserva visibilidade de falhas inesperadas."],
+["Um projeto separa funcionalidades em arquivos importáveis. Qual recurso organiza código?","Módulos e pacotes.","Módulos organizam nomes e funcionalidades."],
+["Uma função sem estado externo retorna sempre o mesmo resultado para os mesmos argumentos. Qual propriedade apresenta?","Pureza e previsibilidade.","Funções puras são mais fáceis de testar."],
+["Uma coleção grande deve produzir itens sob demanda. Qual construção economiza memória?","Gerador com yield.","Geradores produzem valores sem materializar todos de uma vez."],
+["Uma aplicação armazena senha. Qual conduta é segura?","Guardar hash com salt usando biblioteca apropriada.","Senhas não devem ser guardadas em texto puro."]
+]},
+"Linguagem C":{prefix:"c",seeds:[
+["Uma função recebe int *p e executa *p=10 com ponteiro válido. Qual efeito ocorre?","O objeto apontado passa a armazenar 10.","A desreferenciação acessa o valor apontado."],
+["Um vetor possui n posições. Quais índices são válidos em C?","De 0 até n menos 1.","Arrays em C começam no índice zero."],
+["Uma cadeia char termina corretamente com qual caractere?","Caractere nulo '\\0'.","Strings em C são terminadas por nulo."],
+["Uma função retorna endereço de variável local automática. Qual problema ocorre?","O endereço deixa de ser válido após o retorno.","A duração da variável termina ao sair da função."],
+["Uma alocação dinâmica pode falhar. O que verificar após malloc?","Se o ponteiro retornado é NULL.","malloc pode falhar e retornar NULL."],
+["Um bloco alocado dinamicamente não será mais usado. Qual operação fazer?","Chamar free uma vez sobre o bloco.","free libera a memória e evita vazamento."],
+["Uma função precisa alterar variável do chamador. Como fazer em C?","Passar o endereço por ponteiro.","C passa argumentos por valor; ponteiros acessam o objeto original."],
+["Um parâmetro de função é declarado como int a[]. O que ocorre com sizeof(a)?","O parâmetro é ajustado para ponteiro.","O tamanho do array não é preservado como parâmetro."],
+["Uma equipe compara conteúdo de duas strings C. Qual função usar?","strcmp.","strcmp compara conteúdo, não endereços."],
+["Um arquivo aberto por fopen precisa ser encerrado. Como proceder?","Chamar fclose e verificar erros quando necessário.","fclose libera recursos do fluxo."],
+["O código usa x=5 quando pretendia testar igualdade. Qual operador usar?","==.","= atribui; == compara."],
+["Um índice pode ultrapassar tamanho do vetor. Qual proteção aplicar?","Validar limites antes de acessar o elemento.","C não verifica limites automaticamente."],
+["Um cabeçalho é incluído por vários arquivos. O que evita redefinições?","Include guards.","Guards evitam inclusões repetidas no mesmo módulo."]
+]},
+"Linguagem PHP":{prefix:"ph",seeds:[
+["Uma aplicação concatena entrada de formulário a SQL. Como prevenir injeção?","Usar consultas preparadas com parâmetros vinculados.","A separação de valores impede alterar a estrutura SQL."],
+["Qual sintaxe inicia o nome de uma variável PHP?","Cifrão, como $nome.","Variáveis PHP começam com cifrão."],
+["Um formulário envia valores ao servidor. A aplicação deve confiar neles?","Não; validar, normalizar e autorizar no servidor.","Dados do cliente podem ser alterados."],
+["Uma página exibe comentário do usuário. Que medida reduz XSS?","Escapar saída conforme o contexto HTML.","Codificação contextual impede execução de marcação injetada."],
+["Um sistema autentica usuário e usa sessões. Qual medida reduz fixação de sessão?","Regenerar o identificador após autenticação.","A troca do identificador reduz reutilização de um valor conhecido."],
+["Uma API precisa enviar dados estruturados ao cliente. Qual formato é comum?","JSON serializado e validado.","JSON é formato interoperável para troca de dados."],
+["Um array associativo precisa ser percorrido por chave e valor. Qual estrutura usar?","foreach.","foreach percorre arrays e iteráveis."],
+["Uma rota administrativa não pode ser acessada por usuário comum. O que verificar?","Autenticação e autorização no servidor em cada requisição.","Ocultar controles visuais não protege a rota."],
+["Uma aplicação guarda senhas de acesso. Quais funções usar?","password_hash e password_verify.","As funções fazem hashing seguro e verificação."],
+["Um valor pode estar ausente ou conter null. Como distinguir?","Usar isset ou array_key_exists conforme a regra desejada.","As funções diferem no tratamento de null."],
+["Um serviço consulta banco dentro de loop e abre conexão repetida. Como otimizar?","Reutilizar conexão e evitar padrão N+1.","Reduzir conexões e consultas diminui overhead."],
+["Uma API encontra erro interno. O que informar ao usuário?","Mensagem segura ao cliente e detalhes técnicos apenas no log.","A resposta não deve expor segredos ou rastros internos."],
+["Um projeto usa dependências e autoload. Qual ferramenta do ecossistema PHP gerencia isso?","Composer.","Composer administra dependências e autoload."]
+]},
+"Linguagem Java":{prefix:"ja",seeds:[
+["Qual palavra-chave declara herança de classe em Java?","extends.","extends estabelece herança entre classes."],
+["Qual palavra-chave declara que uma classe implementa interface?","implements.","implements conecta uma classe ao contrato da interface."],
+["Um atributo só pode ser acessado diretamente pela própria classe. Qual modificador usar?","private.","private restringe acesso direto."],
+["Um campo deve pertencer à classe e ser compartilhado. Qual modificador usar?","static.","Membro estático pertence à classe."],
+["Uma lista deve conter apenas textos. Qual recurso expressa isso?","Generics, por exemplo List<String>.","Generics oferecem segurança de tipos."],
+["Um método pode falhar ao ler arquivo. Como comunicar falha ao chamador?","Tratar ou declarar exceção apropriada.","Exceções representam condições excepcionais."],
+["Um recurso precisa ser fechado após uso, inclusive em exceção. Qual construção usar?","try-with-resources.","A construção fecha recursos AutoCloseable automaticamente."],
+["Uma coleção não deve ser modificada por consumidores. Qual desenho ajuda?","Expor visão imutável ou cópia defensiva.","Imutabilidade reduz efeitos colaterais."],
+["Uma interface fornece implementação comum opcional. Qual recurso Java suporta isso?","Método default.","Métodos default permitem implementação na interface."],
+["Duas threads alteram o mesmo campo. Qual risco requer tratamento?","Condição de corrida.","Acesso sem sincronização pode corromper estado."],
+["Uma equipe sobrescreve método e quer declarar intenção. Qual anotação usar?","@Override.","O compilador verifica a sobrescrita."],
+["Objetos usados em HashSet devem comparar por valor. Quais métodos manter coerentes?","equals e hashCode.","Coleções hash dependem da consistência entre os métodos."],
+["Uma classe define operações abstratas e não deve ser instanciada diretamente. Como declarar?","abstract.","Classes abstratas permitem comportamento parcial."]
+]},
+"Engenharia de Software":{prefix:"en",seeds:[
+["Uma equipe quer entregar cedo e ajustar prioridades com retorno dos usuários. Qual processo favorece isso?","Desenvolvimento iterativo e incremental.","Iterações apoiam adaptação e entrega progressiva."],
+["Um requisito ambíguo afeta vários módulos. O que fazer antes de codificar?","Definir critérios de aceitação com as partes interessadas.","Critérios verificáveis reduzem interpretações divergentes."],
+["Testes rodam automaticamente quando alterações entram na branch principal. Qual prática é essa?","Integração contínua.","Verificações frequentes detectam regressões cedo."],
+["Uma equipe quer reduzir defeitos antes da liberação. Qual combinação ajuda?","Testes automatizados, revisão de código e análise contínua.","Práticas complementares verificam diferentes riscos."],
+["É necessário demonstrar que cada requisito foi testado. Qual artefato ajuda?","Matriz de rastreabilidade.","Ela liga requisito, implementação e verificação."],
+["Um legado contém dependências rígidas e não tem testes. Qual mudança reduz risco?","Refatorar incrementalmente com testes de caracterização.","Testes registram comportamento existente antes de alterá-lo."],
+["Um serviço apresenta lentidão em produção. O que deve orientar a otimização?","Medição e perfilamento sob carga representativa.","A otimização deve atingir o gargalo medido."],
+["Um protótipo visual foi aprovado. Requisitos de segurança e acessibilidade podem ser ignorados?","Não; requisitos não funcionais precisam ser especificados e verificados.","Aprovação visual não valida atributos de qualidade."],
+["Uma equipe libera nova versão para pequena parcela dos usuários. Qual estratégia?","Implantação gradual com métricas e rollback.","Rollout progressivo limita impacto."],
+["Uma mudança quebrou recurso antigo. Qual teste detectaria a regressão?","Teste de regressão.","Ele verifica funcionalidades previamente existentes."],
+["Uma organização avalia facilidade de modificar o sistema. Qual atributo de qualidade analisa?","Manutenibilidade.","Manutenibilidade diz respeito a analisar, modificar e testar."],
+["Uma arquitetura organiza interface, domínio e persistência. Qual objetivo deve guiar dependências?","Separação de responsabilidades e acoplamento controlado.","Camadas bem definidas isolam preocupações."],
+["Uma vulnerabilidade é corrigida em produção. O que completa o tratamento?","Adicionar teste de regressão e registrar causa para prevenção.","A correção deve evitar reincidência."]
+]},
+"Gestão de Projetos":{prefix:"gp",seeds:[
+["Uma funcionalidade nova altera prazo e custo. Qual análise precede a aprovação?","Impacto em escopo, prazo, custo, riscos e partes interessadas.","Controle de mudanças examina efeitos antes da decisão."],
+["Tarefas dependentes ameaçam a data final. Qual técnica identifica a sequência crítica?","Análise do caminho crítico.","O caminho crítico determina a duração mínima do cronograma."],
+["A equipe estima trabalho com incerteza. Qual método usa estimativas otimista, provável e pessimista?","Estimativa de três pontos.","A técnica representa incerteza explicitamente."],
+["Um risco tem alta probabilidade e impacto. O que deve constar no plano?","Responsável, resposta, gatilhos e acompanhamento.","O plano transforma risco em ação monitorável."],
+["O patrocinador pede trabalho fora do escopo aprovado. Qual referência usar?","Linha de base do escopo e processo de controle de mudanças.","A baseline permite avaliar e aprovar desvios."],
+["Uma equipe ágil precisa ordenar backlog. O que deve orientar prioridade?","Valor, risco, dependências e estratégia do produto.","Prioridade deve se alinhar aos objetivos."],
+["Um cronograma está atrasado. Qual indicador de valor agregado pode ajudar?","Índice de desempenho de prazo, junto ao contexto da execução.","O indicador sinaliza desempenho temporal."],
+["Duas partes interessadas discordam sobre requisito. Qual ação do gerente é útil?","Facilitar negociação com objetivos, evidências e critérios acordados.","Mediação favorece decisão documentada."],
+["Uma entrega não atende critérios de aceite. Como proceder?","Registrar não conformidade e corrigir antes do aceite.","Conclusão da tarefa não substitui aceitação."],
+["O projeto depende de fornecedor único. O que monitorar?","Prazo, qualidade, contrato, riscos e contingência.","Dependência externa precisa de acompanhamento."],
+["Uma lição foi aprendida após falha. Quando registrá-la?","Durante o projeto e associada a uma ação de melhoria.","Registro contemporâneo preserva contexto."],
+["Uma reunião diária se estende em debate técnico. Como ajustar?","Fazer alinhamento breve e marcar discussão com os envolvidos.","Reunião diária não substitui resolução detalhada."],
+["Prazo, escopo e orçamento entram em conflito. Como decidir?","Negociar prioridades e explicitar impactos nas restrições.","A decisão equilibra restrições com transparência."]
+]},
+"Formação Geral e Sociedade":{prefix:"fg",seeds:[
+["Chuvas intensas ameaçam bairros e a prefeitura divulga áreas de risco. Qual recurso amplia acesso?","Mapa acessível, atualizado e acompanhado de canais não digitais.","Informação inclusiva considera diferentes condições de acesso."],
+["Uma notícia atribui evento local exclusivamente ao El Niño. Como avaliar?","Consultar séries e fontes meteorológicas, distinguindo influência de causalidade única.","A variabilidade regional interage com outros fatores."],
+["Uma plataforma recomenda notícias por engajamento. Que medida ajuda a enfrentar desinformação?","Transparência de critérios, contexto e canal de contestação.","Explicabilidade e revisão apoiam respostas proporcionais."],
+["Uma enchente afeta moradores sem internet. Qual estratégia de alerta é mais equitativa?","Combinar alertas digitais, rádio, sinalização e comunicação comunitária.","Canais diversos reduzem exclusão."],
+["Um município publica dados ambientais reutilizáveis. O que documentar?","Origem, método, unidade, período e limitações.","Metadados sustentam interpretação correta."],
+["Uma previsão climática tem incerteza. Como comunicá-la?","Informar intervalo, horizonte temporal e fonte.","Isso evita falsa precisão."],
+["Uma IA prioriza atendimento público. Qual salvaguarda é necessária?","Revisão humana, critérios claros e possibilidade de recurso.","Decisões de impacto exigem responsabilização."],
+["Um centro de dados aumenta consumo de energia regional. O que avaliar?","Demanda, fonte energética, uso de água e impactos locais.","A infraestrutura digital tem efeitos materiais."],
+["Um portal público deve atender pessoas com deficiência. O que implementar?","HTML semântico, teclado, contraste e alternativas textuais.","Acessibilidade precisa integrar o projeto."],
+["Uma comunidade fornece dados territoriais. Como respeitar participação social?","Explicar usos, ouvir necessidades e incluir grupos afetados.","Participação melhora legitimidade e adequação."],
+["Uma comparação de renda usa bairros de tamanhos diferentes. O que deve ser apresentado?","Denominadores, período, fonte e limitações.","Contexto estatístico evita conclusões enganosas."]
+]},
+"Redes de Computadores":{prefix:"re",seeds:[
+["Um domínio deve ser associado a registros de serviço e endereço. Qual protocolo consultar?","DNS.","DNS resolve nomes e registros associados."],
+["Uma conexão HTTPS requer criptografia e autenticação. Qual protocolo oferece proteção?","TLS.","TLS protege confidencialidade e integridade conforme sua configuração."],
+["Um roteador encaminha pacote entre redes IP. Que informação consulta?","Tabela de rotas e prefixo de destino.","O prefixo orienta o próximo salto."],
+["Uma aplicação exige entrega confiável e ordenada sobre IP. Qual protocolo usar?","TCP.","TCP fornece fluxo confiável e ordenado."],
+["Voz em tempo real prioriza baixa latência e tolera perdas. Qual transporte pode ser adequado?","UDP, com tratamento de aplicação quando necessário.","UDP não retransmite nem ordena por si só."],
+["Dispositivos recebem endereços e gateway dinamicamente. Qual serviço pode fazê-lo?","DHCP.","DHCP distribui parâmetros de configuração."],
+["Uma organização separa redes de visitantes e administrativas em switches. Que recurso aplicar?","VLANs.","VLANs segmentam domínios de camada 2."],
+["Um servidor expõe serviço que não utiliza. Qual medida reduz superfície de ataque?","Desabilitar serviços desnecessários e filtrar tráfego.","Menos serviços expostos reduzem pontos de entrada."],
+["Uma chamada de vídeo perde qualidade. Quais métricas investigar?","Latência, perda, jitter e utilização do enlace.","Métricas combinadas caracterizam a qualidade."],
+["Um endereço IPv4 é dividido entre rede e hosts. Qual elemento define a divisão?","Máscara ou prefixo CIDR.","O prefixo determina bits de rede."],
+["Uma rede Wi-Fi sofre interferência. O que orientar a configuração?","Medição local de canais, potência e posicionamento.","O ambiente influencia interferência."],
+["Uma rede de convidados não deve alcançar servidores internos. Qual controle usar?","Segmentação com regras de firewall.","Políticas restringem tráfego entre segmentos."],
+["Um cliente precisa validar identidade do servidor TLS. O que conferir?","Certificado e cadeia de confiança.","O certificado vincula identidade a uma chave pública."]
+]},
+"Modelagem de Banco de Dados":{prefix:"mbd",seeds:[
+["Uma clínica registra pacientes e consultas sem repetir dados do paciente em cada consulta. Que modelo usar?","Entidades Paciente e Consulta ligadas por chave estrangeira.","A separação reduz redundância e representa cardinalidade."],
+["Um paciente pode ter várias consultas, e cada consulta pertence a um paciente. Qual cardinalidade?","Um para muitos entre Paciente e Consulta.","A cardinalidade expressa a regra do domínio."],
+["Aluno e disciplina têm relação muitos-para-muitos. Como mapear ao modelo relacional?","Criar entidade associativa com chaves estrangeiras.","A tabela associativa representa cada matrícula."],
+["Um endereço contém rua, número, cidade e CEP. Quando separar seus componentes?","Quando forem consultados ou validados independentemente.","Atributos simples facilitam filtros e restrições."],
+["Uma entidade produto precisa de identificador estável. O que escolher como chave?","Identificador único, estável e não nulo.","A chave distingue cada ocorrência."],
+["Nome do departamento é repetido em cada funcionário. Que problema pode surgir?","Anomalias de atualização, inserção e exclusão.","Redundância pode produzir inconsistência."],
+["Uma entidade item só existe dentro de uma compra. Como compor sua identificação?","Chave parcial combinada à chave da compra.","Sua identidade depende da entidade proprietária."],
+["Cada pedido exige ao menos um item. Como garantir a regra?","Registrar cardinalidade e validar a regra no domínio.","Restrições devem refletir a regra de negócio."],
+["A equipe converte modelo conceitual para relacional. O que definir?","Tabelas, atributos, chaves e restrições.","O modelo lógico especifica estruturas relacionais."],
+["Um cliente pode ter vários telefones. Como armazenar sem lista em uma coluna?","Entidade Telefone relacionada a Cliente.","A relação separada mantém valores atômicos."],
+["Uma ocorrência não existe sem entidade proprietária. O que modelar?","Relacionamento identificador e dependência de existência.","A dependência faz parte da semântica do domínio."],
+["Uma regra torna e-mail único por organização. O que revisar?","Chave candidata e restrição de unicidade no escopo correto.","A restrição deve refletir o domínio de unicidade."],
+["Um diagrama ER foi elaborado sem validar cardinalidades. Como revisá-lo?","Percorrer cenários reais com usuários e exemplos de instâncias.","Exemplos testam as regras representadas."],
+["Uma entidade mistura dados atuais e histórico de endereço. Qual decisão modela temporalidade?","Separar histórico com período de validade quando houver necessidade de auditoria.","A modelagem temporal preserva mudanças ao longo do tempo."],
+["Uma equipe precisa transformar relacionamento ternário entre fornecedor, peça e projeto. Qual cuidado tomar?","Preservar a semântica conjunta em entidade associativa apropriada.","Decomposição ingênua pode perder a regra da relação."]
+]},
+"Big Data":{prefix:"big",seeds:[
+["Sensores enviam eventos em alta velocidade e grande volume. Qual dimensão está em foco?","Velocidade de geração e processamento.","Velocidade descreve taxa de chegada e necessidade de resposta."],
+["Uma empresa combina tabelas, logs e imagens. Qual dimensão aparece?","Variedade de formatos e estruturas.","Big Data inclui dados estruturados e não estruturados."],
+["Registros repetidos chegam de sistemas diferentes. Qual etapa melhora qualidade?","Deduplicação, validação e tratamento de inconsistências.","Preparação evita distorcer análises."],
+["Dados brutos de formatos diversos são guardados para análises futuras. Qual arquitetura usar?","Data lake com catálogo, governança e controle de acesso.","Sem catálogo e governança, os dados ficam difíceis de usar e proteger."],
+["Executivos consultam métricas integradas e modeladas. Qual repositório pode atender?","Data warehouse orientado a consultas analíticas.","O warehouse organiza dados para análise."],
+["Arquivos grandes são processados em vários nós. Qual benefício buscar?","Paralelismo e escalabilidade horizontal.","Particionamento distribui trabalho."],
+["Uma análise usa dados pessoais em escala. O que governar?","Finalidade, minimização, acesso, retenção e qualidade.","Governança inclui proteção e uso legítimo."],
+["Partições possuem tamanhos diferentes. Como calcular média global corretamente?","Somar valores e contagens parciais antes de dividir.","Média simples das médias pode ser incorreta."],
+["Eventos chegam atrasados a um fluxo temporal. O que configurar?","Janelas, marca d'água e política de atualização.","Semântica temporal trata eventos tardios."],
+["A classe positiva é rara em um conjunto. Como avaliar um classificador?","Métricas por classe, como precisão e recall.","Acurácia global pode mascarar falhas na classe minoritária."],
+["Um indicador precisa ser reproduzido meses depois. O que registrar?","Linhagem, transformações e versões dos dados.","Linhagem registra origem e processamento."],
+["Uma tabela distribuída fica concentrada em poucos nós. O que rever?","Chave de particionamento e balanceamento dos dados.","Partições enviesadas criam hotspots."],
+["Dados históricos são pouco acessados e caros. Que medida pode reduzir custo?","Política de ciclo de vida, compressão e armazenamento por camadas.","O acesso deve equilibrar custo e desempenho."],
+["Fontes usam fusos diferentes. Como preparar timestamps?","Normalizar horários e preservar fuso e origem relevantes.","Padronização evita agrupamentos temporais incorretos."],
+["Um indicador aberto será publicado. O que acompanhar?","Metadados, método, período, limites e licença.","Documentação apoia interpretação e reuso."]
+]},
+"IoT":{prefix:"iot",seeds:[
+["Um sensor mede temperatura e envia sinal ao serviço. O que transforma grandeza física em dado?","Sensor e circuito de aquisição apropriado.","O sensor mede e a interface condiciona o sinal."],
+["Um dispositivo opera com rede instável. Como preservar leituras?","Armazenar temporariamente e reenviar com deduplicação.","Buffer local e idempotência tratam interrupções."],
+["Dispositivos locais usam protocolo diferente da nuvem. Que papel exerce o gateway?","Intermediar protocolos e agregar comunicação.","Gateways traduzem e agregam dados."],
+["Atualização remota pode ser interceptada. O que exigir?","Imagem assinada, canal autenticado e mecanismo de recuperação.","Assinatura verifica integridade e origem."],
+["Telemetria trafega sem criptografia. Qual risco existe?","Exposição ou alteração das informações em trânsito.","Proteção reduz interceptação e adulteração."],
+["Um sensor envia dados a cada segundo e usa bateria. Qual trade-off analisar?","Consumo energético versus latência e resolução temporal.","Frequência afeta bateria e detecção de eventos."],
+["Sensores dormem a maior parte do tempo. Como reduzir consumo de rádio?","Planejar ciclos de comunicação e usar protocolos de baixo consumo.","Rádio pode dominar gasto energético."],
+["Uma fechadura conectada usa senha padrão do fabricante. O que fazer?","Trocar credenciais e configurar identidade individual.","Credenciais padrão facilitam invasões."],
+["Um dispositivo coleta localização. Como reduzir risco à privacidade?","Minimizar coleta, informar finalidade e restringir acesso.","Necessidade e transparência limitam exposição."],
+["Leituras locais podem ser enviadas muito depois do evento. Que metadados incluir?","Timestamp, identidade do dispositivo e origem.","Metadados permitem ordenar eventos corretamente."],
+["Um sensor registra valor fisicamente impossível. Como tratar?","Validar faixa, sinalizar anomalia e guardar evidência.","Validação impede contaminar decisões."],
+["Um controlador industrial perde conexão. O que o projeto deve prever?","Estado seguro e controle local de fallback.","A desconexão não deve causar comportamento perigoso."],
+["Dispositivos usam protocolos incompatíveis. Como aumentar interoperabilidade?","Modelos de dados e interfaces documentadas.","Padrões reduzem dependência de fornecedor."],
+["Milhares de dispositivos precisam ser instalados. Como administrar identidade?","Provisionamento automatizado com credenciais únicas.","Identidade individual permite inventário e revogação."],
+["Um comando é reenviado após reconexão. Como evitar ação duplicada?","Usar identificador de comando e execução idempotente.","Deduplicação evita efeitos repetidos."]
+]},
+"Sistemas Embarcados":{prefix:"emb",seeds:[
+["Um controlador deve responder dentro de prazo máximo. Qual requisito central avaliar?","Previsibilidade temporal e atendimento a deadlines.","Tempo de resposta faz parte da correção do sistema."],
+["Uma tarefa perde prazo após aumento de carga. O que analisar?","WCET, prioridades e escalonabilidade.","Análise temporal verifica se tarefas cabem nos prazos."],
+["Um microcontrolador tem RAM e flash limitadas. Como planejar implementação?","Medir uso de memória e dimensionar estruturas no alvo.","Recursos finitos precisam de orçamento."],
+["Um sensor periódico alimenta controle. Como limitar jitter?","Usar temporização e escalonamento compatíveis com a periodicidade.","Variação temporal pode degradar o controle."],
+["Uma tarefa trava sem retornar. Qual recurso pode detectar?","Watchdog configurado com política de recuperação.","O watchdog detecta falta de progresso."],
+["Um motor deve variar potência média por sinal digital. Qual periférico pode gerar esse sinal?","Temporizador ou módulo PWM.","PWM controla ciclo de trabalho."],
+["Energia pode falhar durante escrita em flash. Como proteger parâmetros?","Gravar cópia validada e permitir recuperação da versão anterior.","Escrita robusta preserva configuração consistente."],
+["Um dispositivo médico perde comunicação. Que comportamento deve ser definido?","Estado seguro e procedimento de fallback testado.","A falha deve produzir resposta previsível."],
+["Uma interrupção crítica aciona uma tarefa. O que evitar no tratador?","Rotinas longas ou bloqueantes.","Tratadores curtos reduzem latência."],
+["Um periférico serial será conectado ao microcontrolador. O que validar?","Tensão, temporização, protocolo e limites elétricos.","Compatibilidade elétrica e lógica é necessária."],
+["Um equipamento usa bateria por meses. O que medir para otimizar?","Consumo por estado e energia de comunicação.","Medições no alvo orientam otimização."],
+["Atualizações de firmware ocorrem em campo. Qual recurso é importante?","Bootloader autenticado, validação e rollback.","Recuperação evita inutilização do equipamento."],
+["A equipe testou firmware somente em simulador. O que falta?","Validar temporização e interação física no hardware real.","Simulação não reproduz todos os efeitos do alvo."],
+["Um sistema de tempo real executa tarefa periódica. Qual política pode priorizar prazos?","Escalonamento por prioridade ou deadline conforme o modelo de tarefas.","A política deve corresponder às restrições temporais."],
+["Um processador possui periféricos mapeados em memória. Como o firmware os acessa?","Registradores mapeados com operações apropriadas e controle de concorrência.","A interface do hardware é exposta por registradores."]
+]}
+};
+const difficulty = ["Média","Fácil","Difícil","Média","Fácil","Média","Difícil","Média","Fácil","Média","Difícil","Média","Fácil"] as const;
+const counts = Object.fromEntries(Object.entries(expandedTopics).map(([topic, cfg])=>[topic,cfg.seeds.length]));
+const buildExpanded = (): Question[] => Object.entries(expandedTopics).flatMap(([topic, config]) => {
+  const start = topic === "Formação Geral e Sociedade" ? 5 : 3;
+  const expected = topic === "Formação Geral e Sociedade" ? 11 : topic === "Modelagem de Banco de Dados" || topic === "Sistemas Embarcados" ? 15 : 13;
+  if (config.seeds.length !== expected) throw new Error(\`Sementes inválidas em \${topic}: \${config.seeds.length}\`);
+  return config.seeds.map(([prompt, correct, explanation], index) => {
+    const distractors: string[] = [];
+    for (let offset=1; distractors.length<3; offset++) {
+      const candidate=config.seeds[(index+offset)%config.seeds.length][1];
+      if(candidate!==correct&&!distractors.includes(candidate)) distractors.push(candidate);
+    }
+    const answer=index%4;
+    const options=[...distractors]; options.splice(answer,0,correct);
+    return {id:\`\${config.prefix}\${start+index}\`,topic,difficulty:difficulty[index%difficulty.length],prompt,options:options as [string,string,string,string],answer,explanation};
+  });
+});
+questionBank.push(...buildExpanded());
