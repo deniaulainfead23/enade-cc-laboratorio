@@ -2,7 +2,7 @@
 
 ## O que a responsável precisa criar na conta
 
-1. **Supabase:** crie um projeto e guarde com segurança a senha do banco. No painel do projeto, localize o project reference ID, a Project URL e a chave pública `anon`/publishable.
+1. **Supabase:** o projeto `enade-cc-bacharelado` já foi criado e o esquema inicial foi executado pelo SQL Editor. Guarde com segurança a senha do banco. No painel, localize o project reference ID, a Project URL e a chave pública `anon`/publishable.
 2. **GitHub Actions:** em `Settings → Secrets and variables → Actions`, crie três repositório secrets:
 
    | Secret | De onde vem |
@@ -13,9 +13,9 @@
 
    Não compartilhe esses valores em issue, chat, commit ou arquivo `.env`. Não use a chave `service_role` como alternativa.
 
-   Crie também uma **Actions variable** chamada `SUPABASE_MIGRATIONS_ENABLED` com o valor `true` somente depois de configurar e testar a primeira aplicação do banco. Sem essa variável, os disparos automáticos ficam desabilitados.
+   Crie também uma **Actions variable** chamada `SUPABASE_MIGRATIONS_ENABLED` com o valor `true` somente depois que o workflow manual descrito abaixo terminar com sucesso. Sem essa variável, os disparos automáticos ficam desabilitados.
 
-3. **Aplicar o banco:** depois de salvar os secrets, abra o repositório GitHub, selecione **Actions → Aplicar migrações Supabase → Run workflow** e acompanhe o resultado. O workflow aplica a migração inicial ao banco de produção. Só então habilite a variável `SUPABASE_MIGRATIONS_ENABLED=true` para futuras migrações automáticas.
+3. **Registrar a migração no histórico:** depois de salvar os secrets, abra o repositório GitHub, selecione **Actions → Aplicar migrações Supabase → Run workflow** e acompanhe o resultado. Como o esquema já foi executado manualmente, essa migração idempotente registra o estado no histórico da CLI. Não execute o SQL Editor novamente. Só habilite `SUPABASE_MIGRATIONS_ENABLED=true` após o workflow terminar com sucesso.
 4. **Supabase Auth:** habilite cadastro por e-mail. Em `Authentication → URL Configuration`, defina a URL local e de produção; adicione `http://localhost:3000/**` e a URL real do site nos redirect URLs. Confirmação de e-mail depende da configuração de SMTP e limites do projeto.
 5. **Vercel:** importe `deniaulainfead23/enade-cc-laboratorio` e use o framework Next.js detectado automaticamente.
 6. **Environment Variables na Vercel:** configure para Production, Preview e Development as cinco variáveis abaixo. Para `NEXT_PUBLIC_SITE_URL`, use a URL correta de cada ambiente.

@@ -15,8 +15,8 @@ Este diretório descreve o estado atual do projeto e os procedimentos para execu
 
 - Repositório: `deniaulainfead23/enade-cc-laboratorio`, branch `main`.
 - A aplicação Next.js está preparada para implantação na Vercel.
-- O Supabase ainda precisa ser criado e configurado pela responsável em sua conta.
-- As migrações e os fluxos de GitHub Actions estão versionados, mas a automação só executa depois de cadastrar os segredos do Supabase no GitHub.
+- O projeto Supabase `enade-cc-bacharelado` foi criado; a responsável executou o esquema inicial no SQL Editor e a tela apresentou sucesso.
+- A migração inicial e os fluxos de GitHub Actions estão versionados. Ainda faltam cadastrar os segredos no GitHub e rodar uma vez o workflow manual para registrar a migração na trilha da CLI; depois, a variável de habilitação ativa os pushes automáticos.
 - A prova é livre sem cadastro. Conta por e-mail é opcional e necessária para salvar perfil, tentativas e progresso. Não é necessário ter conta ChatGPT/OpenAI.
 - Questões de estudo autorais usam o ENADE 2021 como referência, sem reproduzir uma prova oficial completa.
 

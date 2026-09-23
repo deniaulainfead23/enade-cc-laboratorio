@@ -12,7 +12,7 @@ Plataforma de orientação, simulados e acompanhamento para o Bacharelado em Ci�
 ## Configuração
 
 1. Crie um projeto Supabase e copie a URL do projeto e a chave pública `anon`/`publishable`.
-2. Configure os três secrets de GitHub `SUPABASE_ACCESS_TOKEN`, `SUPABASE_DB_PASSWORD` e `SUPABASE_PROJECT_ID`; depois execute **Actions → Aplicar migrações Supabase → Run workflow** para criar o esquema. Após essa primeira execução bem-sucedida, crie a Actions variable `SUPABASE_MIGRATIONS_ENABLED=true` para habilitar migrações futuras a cada commit em `main`. O passo a passo está em [`docs/04-instalacao-publicacao-automacao.md`](docs/04-instalacao-publicacao-automacao.md). Se preferir o SQL Editor, execute `supabase/schema.sql` uma única vez e não rode também a migração inicial automatizada.
+2. O esquema inicial já foi executado no SQL Editor do projeto `enade-cc-bacharelado`. Não cole o SQL novamente. Configure os três secrets de GitHub `SUPABASE_ACCESS_TOKEN`, `SUPABASE_DB_PASSWORD` e `SUPABASE_PROJECT_ID` e execute **Actions → Aplicar migrações Supabase → Run workflow** uma vez: a migração inicial é idempotente e essa execução sincroniza o histórico da CLI. Após sucesso, crie a Actions variable `SUPABASE_MIGRATIONS_ENABLED=true` para habilitar migrações futuras a cada commit em `main`. O passo a passo está em [`docs/04-instalacao-publicacao-automacao.md`](docs/04-instalacao-publicacao-automacao.md).
 3. No Supabase Auth, habilite cadastro por e-mail, confirme o URL do site e adicione os endereços de redirecionamento local e de produção.
 4. Crie `.env.local` a partir de `.env.example` e informe:
 

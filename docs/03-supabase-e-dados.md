@@ -18,11 +18,13 @@ O SQL de bootstrap está em `supabase/schema.sql`. A migração inicial versiona
 
 RLS é ativada nas três tabelas. As políticas permitem que cada usuário veja/insira/atualize apenas a linha associada ao próprio `auth.uid()`. Tentativas não podem ser alteradas por uma política de update. A execução da função é concedida ao papel `authenticated`, não ao `anon` ou `public`.
 
-## Primeira aplicação
+## Estado da primeira aplicação
 
-O projeto Supabase não está criado pela aplicação. A responsável cria-o na sua conta e configura os segredos no GitHub. Depois, executa **Actions → Aplicar migrações Supabase → Run workflow**. Não execute ao mesmo tempo `schema.sql` pelo SQL Editor e a migração inicial, pois são dois caminhos para criar o mesmo esquema.
+O projeto `enade-cc-bacharelado` foi criado no Supabase. A responsável executou o conteúdo de `supabase/schema.sql` pelo SQL Editor; a captura apresentada mostrou “Success. No rows returned”, resultado esperado para comandos DDL e permissões.
 
-Se preferir aplicar manualmente o SQL Editor, use `schema.sql` uma única vez e não rode a migração inicial pelo Actions sem reconciliar o histórico de migrações. Para seguir usando deploy automatizado, prefira registrar a primeira instalação pelo workflow e depois tratar cada alteração como uma nova migração incremental.
+Essa execução manual cria o esquema, mas não registra por si só o timestamp no histórico gerenciado pela Supabase CLI. Depois de cadastrar os três secrets do GitHub, rode **Actions → Aplicar migrações Supabase → Run workflow** uma vez. A migração inicial versionada é idempotente (`create table if not exists`, recria as políticas com `drop/create`, e usa `create or replace function`), então a CLI pode registrá-la sem criar as tabelas em duplicidade. Não cole o SQL no Editor de novo.
+
+Depois que o workflow terminar com sucesso, habilite a variável `SUPABASE_MIGRATIONS_ENABLED=true` para que novas migrações sejam aplicadas automaticamente. Se a execução falhar, não ative a automação até examinar o erro e conferir o histórico.
 
 ## Mudanças futuras
 
