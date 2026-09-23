@@ -1,0 +1,20 @@
+import Link from "next/link";
+import { ArrowLeft, ArrowRight, CalendarDays, CircleAlert, Clock3, ExternalLink } from "lucide-react";
+import ScheduleNotice from "@/app/schedule-notice";
+import { enadeSchedule } from "@/app/data/schedule";
+
+export default function SchedulePage() {
+  return <main className="schedule-page">
+    <a className="skip-link" href="#schedule-content">Pular para o conteúdo</a>
+    <header className="schedule-header"><Link href="/" className="schedule-brand"><span className="brand-mark"><CalendarDays size={19}/></span><span>ENADE CC<small>CRONOGRAMA E LEMBRETES</small></span></Link><Link href="/" className="schedule-back"><ArrowLeft size={15}/> Voltar ao painel</Link></header>
+    <div className="schedule-layout" id="schedule-content">
+      <div className="schedule-title"><p className="eyebrow">BACHARELADO EM CIÊNCIA DA COMPUTAÇÃO</p><h1>Cronograma ENADE 2026</h1><p>Datas oficiais da avaliação teórica para Bacharelado e Cursos Superiores de Tecnologia, organizadas para você consultar e se preparar.</p><div className="schedule-callout"><CircleAlert size={18}/><span>O Enade é uma obrigação acadêmica dos estudantes habilitados. Confirme sua situação, inscrição e orientações diretamente com a sua instituição e no Sistema Enade.</span></div></div>
+      <ScheduleNotice />
+      <section className="schedule-timeline" aria-labelledby="official-dates"><div className="schedule-subhead"><div><p className="eyebrow">DATAS E ETAPAS OFICIAIS</p><h2 id="official-dates">Do cadastro à divulgação dos resultados</h2></div><span className="source-tag">Edital nº 61/2026</span></div>
+        <ol>{[...enadeSchedule].sort((a,b)=>a.date.localeCompare(b.date)).map((item,index)=><li className={item.id==="exam"?"timeline-item exam-date": "timeline-item"} key={item.id}><span className="timeline-marker" aria-hidden="true">{item.id==="exam"?"★":String(index+1).padStart(2,"0")}</span><div className="timeline-card"><div className="timeline-date">{item.displayDate}</div><h3>{item.action}</h3><div className="timeline-meta"><span>Responsável: {item.responsible}</span>{item.detail&&<span>{item.detail}</span>}</div></div></li>)}</ol>
+      </section>
+      <section className="study-plan" aria-labelledby="study-plan-title"><div><p className="eyebrow">PLANO DE REVISÃO SUGERIDO</p><h2 id="study-plan-title">Organize as próximas semanas</h2><p>Um roteiro flexível para percorrer as áreas antes da prova. Ajuste o ritmo à sua rotina e use os simulados para decidir o que retomar.</p></div><div className="study-weeks"><article><span>23 set – 4 out</span><h3>Diagnóstico e fundamentos</h3><p>Faça um simulado inicial. Revise matemática discreta, grafos, arquitetura e sistemas operacionais.</p></article><article><span>5 – 18 out</span><h3>Construção de sistemas</h3><p>Retome algoritmos, compiladores, banco de dados, modelagem, orientação a objetos e linguagens.</p></article><article><span>19 out – 1 nov</span><h3>Engenharia e integração</h3><p>Revise engenharia de software, gestão de projetos, redes e sistemas distribuídos. Pratique questões contextualizadas.</p></article><article><span>2 – 15 nov</span><h3>Temas atuais e revisão dirigida</h3><p>Treine IA responsável, dados, cidadania digital, sustentabilidade, eventos climáticos e impactos sociais da tecnologia.</p></article><article><span>16 – 28 nov</span><h3>Revisão final e logística</h3><p>Retome os temas de menor desempenho, faça simulados completos e confira local, documentação e instruções oficiais.</p></article></div></section>
+      <footer className="schedule-footer"><p>Datas consultadas no portal do Inep. Prazos podem ser alterados por retificação; confirme a versão vigente nos canais oficiais.</p><a href="https://www.gov.br/inep/pt-br/acesso-a-informacao/perguntas-frequentes/exame-nacional-de-desempenho-dos-estudantes-enade" target="_blank" rel="noreferrer">Cronograma oficial do Inep <ExternalLink size={14}/></a><a href="https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026" target="_blank" rel="noreferrer">Editais e portarias 2026 <ExternalLink size={14}/></a></footer>
+    </div>
+  </main>;
+}
