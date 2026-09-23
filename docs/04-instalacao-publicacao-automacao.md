@@ -13,7 +13,9 @@
 
    Não compartilhe esses valores em issue, chat, commit ou arquivo `.env`. Não use a chave `service_role` como alternativa.
 
-3. **Aplicar o banco:** depois de salvar os secrets, abra o repositório GitHub, selecione **Actions → Aplicar migrações Supabase → Run workflow** e acompanhe o resultado. O workflow aplica a migração inicial ao banco de produção.
+   Crie também uma **Actions variable** chamada `SUPABASE_MIGRATIONS_ENABLED` com o valor `true` somente depois de configurar e testar a primeira aplicação do banco. Sem essa variável, os disparos automáticos ficam desabilitados.
+
+3. **Aplicar o banco:** depois de salvar os secrets, abra o repositório GitHub, selecione **Actions → Aplicar migrações Supabase → Run workflow** e acompanhe o resultado. O workflow aplica a migração inicial ao banco de produção. Só então habilite a variável `SUPABASE_MIGRATIONS_ENABLED=true` para futuras migrações automáticas.
 4. **Supabase Auth:** habilite cadastro por e-mail. Em `Authentication → URL Configuration`, defina a URL local e de produção; adicione `http://localhost:3000/**` e a URL real do site nos redirect URLs. Confirmação de e-mail depende da configuração de SMTP e limites do projeto.
 5. **Vercel:** importe `deniaulainfead23/enade-cc-laboratorio` e use o framework Next.js detectado automaticamente.
 6. **Environment Variables na Vercel:** configure para Production, Preview e Development as cinco variáveis abaixo. Para `NEXT_PUBLIC_SITE_URL`, use a URL correta de cada ambiente.
@@ -39,7 +41,7 @@ Na Vercel, a integração com GitHub implanta commits automaticamente depois da 
 
 ### Banco Supabase
 
-O workflow `.github/workflows/supabase-migrations.yml` aplica migrações quando há alteração em `supabase/migrations/**` no branch `main`, ou quando iniciado manualmente em **Actions**. Ele exige os três secrets acima e o ambiente GitHub `production`.
+O workflow `.github/workflows/supabase-migrations.yml` aplica migrações quando há alteração em `supabase/migrations/**` no branch `main` e a Actions variable `SUPABASE_MIGRATIONS_ENABLED` está como `true`. O acionamento manual em **Actions** continua disponível para a configuração inicial e testes. Ambos exigem os três secrets acima. Configure o ambiente GitHub `production` com reviewers/proteção antes de ativar o deploy automático, se disponível na conta.
 
 Fluxo de manutenção: desenvolver uma nova migração, revisar o SQL, enviar para GitHub, conferir a validação do workflow CI e aprovar/acompanhar a execução `Aplicar migrações Supabase`. Esse workflow altera o banco persistente, portanto proteja o ambiente `production` com reviewers obrigatórios se a conta/organização oferecer esse recurso.
 
