@@ -371,7 +371,7 @@ const expandedTopics: Record<string, ExpandedTopic> = {
 const difficulty = ["Média","Fácil","Difícil","Média","Fácil","Média","Difícil","Média","Fácil","Média","Difícil","Média","Fácil"] as const;
 const buildExpanded = (): Question[] => Object.entries(expandedTopics).flatMap(([topic, config]) => {
   const start = topic === "Formação Geral e Sociedade" ? 5 : 3;
-  const expected = topic === "Formação Geral e Sociedade" ? 11 : topic === "Modelagem de Banco de Dados" || topic === "Sistemas Embarcados" ? 15 : 13;
+  const expected = topic === "Formação Geral e Sociedade" ? 11 : topic === "Modelagem de Banco de Dados" || topic === "Big Data" || topic === "IoT" || topic === "Sistemas Embarcados" ? 15 : 13;
   if (config.seeds.length !== expected) throw new Error(`Sementes inválidas em ${topic}: ${config.seeds.length}`);
   return config.seeds.map(([prompt, correct, explanation], index) => {
     const distractors: string[] = [];
