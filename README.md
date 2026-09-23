@@ -31,7 +31,7 @@ Plataforma de orientação, simulados e acompanhamento para o Bacharelado em Ci�
    npm run dev
    ```
 
-6. Envie o projeto para um repositório GitHub novo. Na Vercel, importe esse repositório e cadastre as mesmas duas variáveis de ambiente em **Project Settings → Environment Variables**. Faça um novo deploy após salvar as variáveis.
+6. Envie o projeto para um repositório GitHub novo. Na Vercel, importe esse repositório e cadastre as cinco variáveis de ambiente em **Project Settings → Environment Variables**. Faça um novo deploy após salvar as variáveis.
 
 As chaves mostradas acima são as chaves públicas do Supabase. Nunca coloque uma `service_role`/secret key no navegador, no repositório ou em variáveis `NEXT_PUBLIC_*`.
 
