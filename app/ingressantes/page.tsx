@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, CalendarDays, CircleAlert, ExternalLink, GraduationCap, ShieldCheck } from "lucide-react";
+import { ArrowLeft, CircleAlert, ExternalLink, GraduationCap, ShieldCheck } from "lucide-react";
 
 const steps = [
   { date: "Edição 2026", title: "A IES verifica e realiza a inscrição", text: "A coordenação identifica os ingressantes habilitados e confirma a inscrição no Sistema Enade. O estudante deve consultar a coordenação para saber se foi inscrito." },
@@ -8,7 +8,7 @@ const steps = [
 ];
 
 export default function IngressantesPage() {
-  return <main className="schedule-page">
+  return <main className="schedule-page ingressantes-page">
     <a className="skip-link" href="#ingressantes-content">Pular para o conteúdo</a>
     <header className="schedule-header">
       <Link href="/" className="schedule-brand"><span className="brand-mark"><GraduationCap size={19}/></span><span>ENADE CC<small>GUIA PARA INGRESSANTES</small></span></Link>
@@ -19,12 +19,12 @@ export default function IngressantesPage() {
         <p className="eyebrow">BACHARELADO EM CIÊNCIA DA COMPUTAÇÃO</p>
         <h1>ENADE 2026 para ingressantes</h1>
         <p>Orientações para estudantes que iniciaram Ciência da Computação em 2026 e podem ser habilitados como ingressantes nesta edição.</p>
-        <div className="schedule-callout"><CircleAlert size={18}/><span><strong>Prazo do questionário: até 18 de dezembro de 2026.</strong> O cronograma específico do Edital Inep nº 61/2026 informa o período de 1º de outubro a 18 de dezembro. Confira no Sistema Enade se houve atualização de prazo.</span></div>
+        <div className="schedule-callout ingressantes-deadline"><CircleAlert size={18}/><span><strong>Prazo do questionário: até 18 de dezembro de 2026.</strong> O cronograma específico do Edital Inep nº 61/2026 informa o período de 1º de outubro a 18 de dezembro. Confira no Sistema Enade se houve atualização de prazo.</span></div>
       </div>
 
       <section className="schedule-timeline" aria-labelledby="eligibility-title">
         <div className="schedule-subhead"><div><p className="eyebrow">QUEM É INGRESSANTE HABILITADO</p><h2 id="eligibility-title">Confira sua condição</h2></div><span className="source-tag">Ciência da Computação</span></div>
-        <div className="study-weeks">
+        <div className="eligibility-grid">
           <article><span><GraduationCap size={16}/> Ingresso em 2026</span><h3>Início do curso nesta edição</h3><p>Para fins do Enade, é ingressante quem iniciou o curso no ano da edição e atende aos critérios de matrícula e carga horária definidos no edital.</p></article>
           <article><span><ShieldCheck size={16}/> Habilitação</span><h3>De 0% a 25% da carga horária</h3><p>O limite é calculado sobre a carga horária mínima do curso até o prazo de retificação das inscrições. Confirme seu enquadramento com a coordenação.</p></article>
           <article><span><CircleAlert size={16}/> Atenção</span><h3>A inscrição é feita pela IES</h3><p>Não basta preencher o questionário: confirme com a coordenação que sua inscrição foi realizada no Sistema Enade.</p></article>

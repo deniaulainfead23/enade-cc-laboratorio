@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, BrainCircuit, ChartNoAxesColumnIncreasing, Code2, Cpu, GitBranch, Network, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, BrainCircuit, ChartNoAxesColumnIncreasing, Code2, Cpu, GitBranch, GraduationCap, Network, ShieldCheck } from "lucide-react";
 import StudyWorkbench from "@/app/study-workbench";
 
 const areas = [
@@ -39,6 +39,16 @@ export default function Home() {
           <section className="feature-card" id="simulados" aria-labelledby="quiz-title">
             <div className="feature-copy"><span className="tag-light">SIMULADO RÁPIDO <span>•</span> 15 QUESTÕES</span><h2 id="quiz-title">Conhecimento que<br/>se conecta.</h2><p>Uma seleção aleatória de questões para revisar fundamentos, resolver problemas e acompanhar sua evolução.</p><a className="primary-button" href="#simulado">Começar simulado <ArrowUpRight size={17}/></a><div className="feature-meta"><span>⏱ Sem limite de tempo</span><span>◉ Feedback ao final</span></div></div>
             <div className="feature-art" aria-hidden="true"><div className="orbit orbit-one"/><div className="orbit orbit-two"/><div className="orb-core"><BrainCircuit size={52}/></div><span className="orb-chip chip-one">10110</span><span className="orb-chip chip-two">∑ G(V,E)</span><span className="orb-chip chip-three">{ } →</span><span className="orb-chip chip-four">AI / ML</span><span className="orb-star">✳</span></div>
+          </section>
+
+          <section className="ingressantes-promo" aria-labelledby="ingressantes-promo-title">
+            <span className="ingressantes-promo-icon"><GraduationCap size={27}/></span>
+            <div className="ingressantes-promo-copy">
+              <p className="eyebrow">ATENÇÃO, INGRESSANTES DE 2026</p>
+              <h2 id="ingressantes-promo-title">Você começou Ciência da Computação este ano?</h2>
+              <p>Confira sua inscrição e responda ao Questionário do Ingressante até <strong>18 de dezembro</strong>.</p>
+            </div>
+            <Link className="ingressantes-promo-button" href="/ingressantes">Ver orientações <ArrowUpRight size={17}/></Link>
           </section>
 
           <div className="section-heading" id="conteudos"><div><p className="eyebrow">SEU MAPA DE ESTUDO</p><h2>Revisar por área</h2></div><a href="#simulado">Ver todas as trilhas <ArrowUpRight size={15}/></a></div>
