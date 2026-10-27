@@ -15,7 +15,7 @@ export default function Home() {
       <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
       <header className="topbar">
         <Link href="/" className="brand" aria-label="ENADE CC, início"><span className="brand-mark"><Cpu size={20} /></span><span>ena<span className="brand-accent">de</span><small>CIÊNCIA DA COMPUTAÇÃO</small></span></Link>
-        <nav aria-label="Navegação principal" className="topnav"><a href="#simulados">Simulados</a><a href="#conteudos">Conteúdos</a><Link href="/cronograma">Cronograma</Link><Link href="/orientacoes">Orientações</Link></nav>
+        <nav aria-label="Navegação principal" className="topnav"><a href="#simulados">Simulados</a><a href="#conteudos">Conteúdos</a><Link href="/cronograma">Cronograma</Link><Link href="/ingressantes">Ingressantes</Link><Link href="/orientacoes">Orientações</Link></nav>
         <div className="top-actions"><span className="cycle-pill"><i /> ENADE 2026</span><a className="profile-button" href="#student-profile" aria-label="Abrir perfil do estudante">EN</a></div>
       </header>
 
@@ -28,6 +28,7 @@ export default function Home() {
           <a className="side-link" href="#pratica"><span>⌘</span> Prática com GitHub</a>
           <a className="side-link" href="#progresso"><span>▥</span> Meu progresso</a>
           <Link className="side-link" href="/cronograma"><span>◷</span> Cronograma e alertas</Link>
+          <Link className="side-link" href="/ingressantes"><span>◎</span> ENADE para ingressantes</Link>
           <div className="side-note"><span className="note-icon"><ShieldCheck size={17}/></span><strong>Seu ritmo, seu caminho</strong><p>Faça simulados sem cadastro; crie uma conta por e-mail para guardar o progresso.</p><a href="#student-profile">Ver meu perfil <ArrowUpRight size={14}/></a></div>
           <div className="side-foot">Material de estudo independente<br/>Referências oficiais do Inep</div>
         </aside>
