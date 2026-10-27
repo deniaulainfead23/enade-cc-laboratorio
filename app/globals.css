@@ -37,3 +37,32 @@ a:focus-visible,button:focus-visible{outline:3px solid #7892ff;outline-offset:3p
 @media(max-width:600px){.terminal-form{flex-wrap:wrap}.terminal-form input{min-width:calc(100% - 34px)}.terminal-form button{margin-left:27px}.terminal-done .plain-button{margin-left:0}}
 .auth-form{display:grid;gap:10px;margin:12px 0 8px}.auth-form label{display:grid;gap:5px;font-size:12px;font-weight:700;color:#667085}.auth-form input{width:100%;min-height:42px;border:1px solid #dfe3ec;border-radius:8px;padding:9px 11px;background:#fff;color:#29344f;font:inherit}.auth-form .primary-button{width:max-content;background:#485ed4;color:#fff;border:0;cursor:pointer}.auth-form .primary-button:disabled{opacity:.6;cursor:not-allowed}.auth-switch,.auth-signout{border:0;background:transparent;padding:6px 0;color:#4e62d1;font-size:12px;font-weight:700;cursor:pointer}.auth-signout{margin-top:10px}.auth-setup-note{background:#fff8e9;padding:9px 11px;border-radius:8px;color:#805c17!important}
 .auth-form label{font-size:14px}.profile-form label{font-size:14px}.profile-form input,.profile-form select{font-size:14px}.field-hint{font-size:12px}.privacy-page{max-width:900px}.privacy-page h1{font-size:34px;line-height:1.15;letter-spacing:-.8px;margin:0 0 12px}.privacy-page h2{font-size:19px;margin:25px 0 6px}.privacy-page>p:not(.eyebrow){font-size:15px;line-height:1.7;color:#515b70}.privacy-page .privacy-updated{font-size:13px!important;color:#7d8596!important}.privacy-page a{color:#4d61d3;text-decoration:underline;text-underline-offset:3px}.privacy-footer{display:flex;gap:20px;border-top:1px solid #e4e7ee;padding-top:18px;margin-top:28px;font-weight:700}
+
+
+/* ENADE para ingressantes: contraste acessível em cartões de fundo claro. */
+.ingressantes-page .schedule-title .eyebrow,
+.ingressantes-page .schedule-subhead .eyebrow{color:#4f5d72}
+.ingressantes-page .schedule-title>p:not(.eyebrow){color:#4b566a;font-size:16px}
+.ingressantes-page .ingressantes-deadline{background:#fff5df;border:1px solid #e6b85f;border-left:5px solid #cf8011;color:#26344a;padding:16px 18px;font-size:14px}
+.ingressantes-page .ingressantes-deadline strong{color:#1b2b42}
+.ingressantes-page .schedule-callout:not(.ingressantes-deadline){background:#eaf4ed;border-color:#c9dfce;color:#29483a}
+.ingressantes-page .schedule-callout:not(.ingressantes-deadline) strong{color:#173d2b}
+.ingressantes-page .eligibility-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ingressantes-page .eligibility-grid article{min-width:0;border:1px solid #d7deea;background:#fff;border-radius:11px;padding:16px}
+.ingressantes-page .eligibility-grid article>span{display:flex;align-items:center;gap:7px;color:#40536c;font-size:12px;font-weight:800;letter-spacing:.2px}
+.ingressantes-page .eligibility-grid article>span svg{color:#385d88;flex:0 0 16px}
+.ingressantes-page .eligibility-grid h3{color:#202c40;font-size:15px;line-height:1.35;margin:11px 0 7px}
+.ingressantes-page .eligibility-grid p{color:#4b5668;font-size:13px;line-height:1.55;margin:0}
+.ingressantes-page .timeline-card>p{color:#4b5668;font-size:13px;line-height:1.6;margin:6px 0 0}
+.ingressantes-page .schedule-footer p{color:#596579}
+.ingressantes-promo{display:flex;align-items:center;gap:18px;margin:22px 0 30px;padding:22px 24px;border-radius:15px;background:#203e5e;border:1px solid #18334f;border-left:8px solid #eda93e;box-shadow:0 10px 24px #172f4a20}
+.ingressantes-promo-icon{width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;border-radius:14px;background:#eda93e;color:#20344e}
+.ingressantes-promo-copy{flex:1;min-width:0}
+.ingressantes-promo-copy .eyebrow{margin:0 0 5px;color:#f5c96e}
+.ingressantes-promo-copy h2{margin:0;color:#fff;font-size:20px;line-height:1.25}
+.ingressantes-promo-copy>p:last-child{margin:6px 0 0;color:#e7edf4;font-size:14px;line-height:1.5}
+.ingressantes-promo-copy>p:last-child strong{color:#ffd375}
+.ingressantes-promo-button{display:flex;align-items:center;justify-content:center;gap:8px;flex:0 0 auto;border-radius:9px;background:#eda93e;color:#1e3047;padding:12px 15px;font-size:13px;font-weight:800;text-decoration:none}
+.ingressantes-promo-button:hover{background:#f5bd5d}
+@media(max-width:760px){.ingressantes-page .eligibility-grid{grid-template-columns:1fr 1fr}.ingressantes-promo{align-items:flex-start;flex-wrap:wrap;padding:18px}.ingressantes-promo-copy{flex-basis:calc(100% - 70px)}.ingressantes-promo-button{margin-left:70px}}
+@media(max-width:520px){.ingressantes-page .eligibility-grid{grid-template-columns:1fr}.ingressantes-promo-copy h2{font-size:18px}.ingressantes-promo-button{margin-left:0;width:100%}}
